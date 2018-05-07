@@ -50,11 +50,11 @@ class DijkstrasAlgorithm {
         }
 
         System.out.print("Vertex\tCost\tPath");
-        System.out.print("\n" + beginVert + " -> " + destination + " \t " + minDistArray[destination] + "\t\t"); //print out the shortest path and cost
+        System.out.print("\n" + (char) (beginVert + 97) + " -> " + (char) (destination + 97) + " \t " + minDistArray[destination] + "\t\t"); //print out the shortest path and cost
 
         printPath(parents[destination], parents);
 
-        System.out.print(destination);
+        System.out.print((char) (destination + 97));
     }
 
     private static void printPath(int currentVertex, int[] parents) {   //print all the shortest paths
@@ -62,26 +62,27 @@ class DijkstrasAlgorithm {
             return;
         }
         printPath(parents[currentVertex], parents); //recursive call
-        System.out.print(currentVertex + " > ");
+        System.out.print((char) (currentVertex + 97) + " > ");
     }
 
     public static void main(String[] args) {
         int[][] Matrix = {
-                {0, 4, 0, 0, 0, 0, 0, 8, 0},
-                {4, 0, 8, 0, 0, 0, 0, 11, 0},
-                {0, 8, 0, 7, 0, 4, 0, 0, 2},
-                {0, 0, 7, 0, 9, 14, 0, 0, 0},
-                {0, 0, 0, 9, 0, 10, 0, 0, 0},
-                {0, 0, 4, 0, 10, 0, 2, 0, 0},
-                {0, 0, 0, 14, 0, 2, 0, 1, 6},
-                {8, 11, 0, 0, 0, 0, 1, 0, 7},
-                {0, 0, 2, 0, 0, 0, 6, 7, 0}};
-        System.out.print("Source Node: ");
+                {0, 2, 0, 0, 0, 0, 6, 0},
+                {2, 0, 7, 0, 2, 0, 0, 0},
+                {0, 7, 0, 3, 0, 3, 0, 0},
+                {0, 0, 3, 0, 0, 0, 0, 2},
+                {0, 2, 0, 9, 0, 2, 1, 0},
+                {0, 0, 3, 0, 2, 0, 0, 2},
+                {6, 0, 0, 0, 1, 0, 0, 4},
+                {0, 0, 0, 2, 0, 2, 4, 0}};
+        System.out.print("Source Node(use lower case): ");
         Scanner in1 = new Scanner(System.in);
-        int source = in1.nextInt();
-        System.out.print("Destination Node: ");
+        char sourceChar = in1.next().charAt(0);
+        int sourceInt = java.lang.Character.getNumericValue(sourceChar) - 10;
+        System.out.print("Destination Node(use lower case): ");
         Scanner in2 = new Scanner(System.in);
-        int end = in2.nextInt();
-        dijkstra(Matrix, source, end);
+        char endChar = in1.next().charAt(0);
+        int endInt = java.lang.Character.getNumericValue(endChar) - 10;
+        dijkstra(Matrix, sourceInt, endInt);
     }
 }
