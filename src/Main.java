@@ -5,6 +5,9 @@ kreyes6@mail.sfsu.edu
  */
 
 import java.util.Scanner;
+import java.util.*;
+import java.lang.*;
+import java.io.*;
 
 class DijkstrasAlgorithm {
 
@@ -65,24 +68,45 @@ class DijkstrasAlgorithm {
         System.out.print((char) (currentVertex + 97) + " > ");
     }
 
-    public static void main(String[] args) {
-        int[][] Matrix = {
-                {0, 2, 0, 0, 0, 0, 6, 0},
-                {2, 0, 7, 0, 2, 0, 0, 0},
-                {0, 7, 0, 3, 0, 3, 0, 0},
-                {0, 0, 3, 0, 0, 0, 0, 2},
-                {0, 2, 0, 9, 0, 2, 1, 0},
-                {0, 0, 3, 0, 2, 0, 0, 2},
-                {6, 0, 0, 0, 1, 0, 0, 4},
-                {0, 0, 0, 2, 0, 2, 4, 0}};
+    public static void main(String[] args) throws FileNotFoundException {
+//        int[][] Matrix = {
+//                {0, 2, 0, 0, 0, 0, 6, 0},
+//                {2, 0, 7, 0, 2, 0, 0, 0},
+//                {0, 7, 0, 3, 0, 3, 0, 0},
+//                {0, 0, 3, 0, 0, 0, 0, 2},
+//                {0, 2, 0, 9, 0, 2, 1, 0},
+//                {0, 0, 3, 0, 2, 0, 0, 2},
+//                {6, 0, 0, 0, 1, 0, 0, 4},
+//                {0, 0, 0, 2, 0, 2, 4, 0}};
+        System.out.print("How many nodes are there?: ");
+        Scanner numIn = new Scanner(System.in);
+        int numMat = numIn.nextInt();
+
+        int[][] a = new int[numMat][numMat];
+        BufferedReader br = new BufferedReader(new FileReader("/Users/kbreyes/IdeaProjects/Dijkstras/src/array.txt"));
+
+        for (int i = 0; i < numMat; i++) {
+            String[] st = new String[0];
+            try {
+                st = br.readLine().trim().split(" ");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            for (int j = 0;j < numMat; j++) {
+                a[i][j] = Integer.parseInt(st[j]);
+            }
+        }
+
         System.out.print("Source Node(use lower case): ");
         Scanner in1 = new Scanner(System.in);
         char sourceChar = in1.next().charAt(0);
         int sourceInt = java.lang.Character.getNumericValue(sourceChar) - 10;
+
         System.out.print("Destination Node(use lower case): ");
         Scanner in2 = new Scanner(System.in);
-        char endChar = in1.next().charAt(0);
+        char endChar = in2.next().charAt(0);
         int endInt = java.lang.Character.getNumericValue(endChar) - 10;
-        dijkstra(Matrix, sourceInt, endInt);
+
+        dijkstra(a, sourceInt, endInt);
     }
 }
